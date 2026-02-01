@@ -14,7 +14,7 @@ from .database import (
 )
 from .validate import validate_url
 
-load_dotenv()
+load_dotenv('../.env')
 
 app = Flask(__name__)
 
