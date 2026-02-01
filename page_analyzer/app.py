@@ -39,6 +39,9 @@ def urls():
 def create_page():
     url = request.form.get('url')
     normal = validate_url(url)
+    if normal == 422:
+        flash("Некорректный URL", "danger")
+        return render_template('index.html'), 422
 
     if not normal:
         flash("Некорректный URL", "danger")
