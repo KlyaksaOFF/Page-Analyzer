@@ -4,7 +4,6 @@ import requests
 from bs4 import BeautifulSoup
 from dotenv import load_dotenv
 from flask import Flask, flash, redirect, render_template, request, url_for
-
 from .database import (
     create_url,
     detail_url,
@@ -20,6 +19,10 @@ app = Flask(__name__)
 
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 
+@app.before_first_request
+def initialize_database():
+    from create_db import init_db
+    init_db()
 
 @app.route('/')
 def index():
