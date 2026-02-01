@@ -1,6 +1,7 @@
-import psycopg2
 import os
 from datetime import date
+
+import psycopg2
 from dotenv import load_dotenv
 
 load_dotenv('env/secret.env')
@@ -34,10 +35,12 @@ except psycopg2.Error as e:
 def create_url(url):
     try:
         with conn.cursor() as cursor:
-            cursor.execute('''INSERT INTO urls (name, created_at) VALUES (%s, %s)''', (url, date.today()))
+            cursor.execute('''INSERT INTO urls (name, created_at) 
+            VALUES (%s, %s)''', (url, date.today()))
             conn.commit()
     except psycopg2.Error as e:
         print(e)
+
 
 def select_url():
     try:
@@ -64,30 +67,40 @@ def select_url():
         print(e)
         return []
 
+
 def detail_url(url_id):
     try:
         with conn.cursor() as cursor:
-            cursor.execute('''SELECT id, name, created_at FROM urls WHERE id = %s''', (url_id,))
+            cursor.execute('''SELECT id, name, created_at 
+            FROM urls WHERE id = %s''', (url_id,))
             row = cursor.fetchone()
             return row
     except psycopg2.Error as e:
         print(e)
         return None
 
+
 def get_url_checks(url_id):
     try:
         with conn.cursor() as cursor:
-            cursor.execute('''SELECT id, status_code, h1, title, description, created_at FROM url_checks WHERE url_id = %s''', (url_id,))
+            cursor.execute('''SELECT 
+            id, status_code, h1, title, description, created_at 
+            FROM url_checks WHERE url_id = %s''', (url_id,))
             rows = cursor.fetchall()
             return rows
     except psycopg2.Error as e:
         print(e)
         return []
 
+
 def insert_url_checks(url_id, status_code, h1, title, description):
     try:
         with conn.cursor() as cursor:
-            cursor.execute('''INSERT INTO url_checks (url_id, status_code, h1, title, description, created_at) VALUES (%s, %s, %s, %s, %s, %s)''', (url_id, status_code, h1, title, description, date.today()))
+            cursor.execute('''INSERT INTO url_checks 
+            (url_id, status_code, h1, title, description, created_at) 
+            VALUES (%s, %s, %s, %s, %s, %s)''',
+                           (url_id, status_code, h1, title,
+                            description, date.today()))
             conn.commit()
     except psycopg2.Error as e:
         print(e)

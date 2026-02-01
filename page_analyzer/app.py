@@ -1,14 +1,19 @@
 import os
 from pathlib import Path
 
-
 import requests
 from bs4 import BeautifulSoup
-
-from .validate import validate_url
-from flask import Flask, render_template, request, flash, redirect, url_for
 from dotenv import load_dotenv
-from .database import create_url, select_url, detail_url, insert_url_checks, get_url_checks
+from flask import Flask, flash, redirect, render_template, request, url_for
+
+from .database import (
+    create_url,
+    detail_url,
+    get_url_checks,
+    insert_url_checks,
+    select_url,
+)
+from .validate import validate_url
 
 BASE_DIR = Path(__file__).parent
 env_path = BASE_DIR / 'env' / 'secret.env'
@@ -17,6 +22,7 @@ load_dotenv(env_path)
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
+
 
 @app.route('/')
 def index():
@@ -27,6 +33,7 @@ def index():
 def urls():
     urls = select_url()
     return render_template("urls.html", urls=urls)
+
 
 @app.post('/urls')
 def create_page():
@@ -41,6 +48,7 @@ def create_page():
     flash('Сайт успешно добавлен', 'success')
     return redirect(url_for('index'))
 
+
 @app.route('/urls/<int:url_id>')
 def detail(url_id):
     url_data = detail_url(url_id)
@@ -48,7 +56,9 @@ def detail(url_id):
         return 'Сайт не найден', 404
     detail = {'id': url_data[0], 'name': url_data[1], 'created_at': url_data[2]}
     check = get_url_checks(url_id)
-    return render_template("detail.html", url_id=url_id, url=detail, check=check)
+    return render_template("detail.html",
+                           url_id=url_id, url=detail, check=check)
+
 
 @app.post('/urls/<int:url_id>/checks')
 def check_url(url_id):
@@ -67,7 +77,8 @@ def check_url(url_id):
         title_tag = soup.find('title')
         title = title_tag.text if title_tag else ''
         description_tag = soup.find('meta', attrs={'name': 'description'})
-        description = description_tag['content'] if description_tag and description_tag.get('content') else ''
+        description = description_tag['content'] \
+            if description_tag and description_tag.get('content') else ''
 
         if status_code >= 500:
             flash('Произошла ошибка', 'danger')

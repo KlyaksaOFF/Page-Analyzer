@@ -1,5 +1,6 @@
 from urllib.parse import urlparse, urlunparse
 
+
 def validate_url(url):
     if not url or len(url.strip()) >= 255:
         return None
