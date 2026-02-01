@@ -12,7 +12,7 @@ def get_db_connection():
     if not DATABASE_URL:
         raise ValueError("DATABASE_URL not set in environment variables")
 
-    conn = psycopg2.connect(DATABASE_URL)
+    conn = psycopg2.connect(DATABASE_URL, sslmode='require')
     conn.autocommit = True
     return conn
 
