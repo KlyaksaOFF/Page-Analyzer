@@ -19,8 +19,7 @@ app = Flask(__name__)
 
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 
-@app.before_first_request
-def initialize_database():
+with app.app_context():
     from create_db import init_db
     init_db()
 
