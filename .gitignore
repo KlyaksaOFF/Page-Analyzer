@@ -2,3 +2,4 @@
 page_analyzer/env/secret.env
 .idea
 page_analyzer/__pycache__
+page_analyzer/env

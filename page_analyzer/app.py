@@ -1,5 +1,4 @@
 import os
-from pathlib import Path
 
 import requests
 from bs4 import BeautifulSoup
@@ -15,9 +14,7 @@ from .database import (
 )
 from .validate import validate_url
 
-BASE_DIR = Path(__file__).parent
-env_path = BASE_DIR / 'env' / 'secret.env'
-load_dotenv(env_path)
+load_dotenv()
 
 app = Flask(__name__)
 
