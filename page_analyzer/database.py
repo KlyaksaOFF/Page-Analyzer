@@ -49,7 +49,7 @@ def create_url(url):
         conn = get_db_connection()
         with conn.cursor() as cursor:
             cursor.execute('''INSERT INTO urls (name, created_at) 
-            VALUES (%s, %s)''', (url, date.today()))
+            VALUES (%s, %s) RETURNING ID''', (url, date.today()))
             url_id = cursor.fetchone()[0]
             conn.commit()
             return url_id
