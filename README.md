@@ -1,8 +1,8 @@
 ### Hexlet tests and linter status:
 [![Actions Status](https://github.com/KlyaksaOFF/python-project-83/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/KlyaksaOFF/python-project-83/actions)
 
-Page Analyzer is a web application for analyzing web pages. Users can add URLs that will be checked for availability and extract important information: headers (h1), meta descriptions, and response status codes.
-🚀 Features
+### Page Analyzer is a web application for analyzing web pages. Users can add URLs that will be checked for availability and extract important information: headers (h1), meta descriptions, and response status codes.
+## 🚀 Features
 
     Add URLs for analysis
 
@@ -22,7 +22,7 @@ Page Analyzer is a web application for analyzing web pages. Users can add URLs t
 
     Visual success/error notifications
 
-🛠 Technologies
+## 🛠 Technologies
 
     Backend: Python 3.13, Flask
 
@@ -37,15 +37,15 @@ Page Analyzer is a web application for analyzing web pages. Users can add URLs t
 📦 Commands
 bash
 
-# Clone the repository
-git clone https://github.com/KlyaksaOFF/python-project-83.git
+### Clone the repository
+git clone https://github.com/KlyaksaOFF/python-project-83.git \
 cd python-project-83
 
-# Install dependencies
+### Install dependencies
 make install
 
-# Run linter
+### Run linter
 make lint
 
-# Start the application
+### Start the application
 make start
