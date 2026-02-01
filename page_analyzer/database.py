@@ -6,7 +6,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 DATABASE_URL = os.getenv('DATABASE_URL')
-
 def get_db_connection():
     DATABASE_URL = os.getenv('DATABASE_URL')
     if not DATABASE_URL:
@@ -15,6 +14,34 @@ def get_db_connection():
     conn = psycopg2.connect(DATABASE_URL)
     conn.autocommit = True
     return conn
+
+def init_db():
+    conn = None
+    try:
+        conn = get_db_connection()
+        with conn.cursor() as cursor:
+            cursor.execute('''
+            CREATE TABLE IF NOT EXISTS urls (
+            id serial PRIMARY KEY,
+            name text NOT NULL UNIQUE,
+            created_at DATE NOT NULL DEFAULT CURRENT_DATE
+            );
+            ''')
+            cursor.execute('''CREATE TABLE IF NOT EXISTS url_checks (
+            id serial PRIMARY KEY,
+            url_id int NOT NULL REFERENCES urls(id) ON DELETE CASCADE,
+            status_code text,
+            h1 text,
+            title text,
+            description text,
+            created_at DATE NOT NULL DEFAULT CURRENT_DATE);''')
+            conn.commit()
+            print('Таблица создана')
+    except psycopg2.Error as e:
+        print(e)
+    finally:
+        if conn is not None:
+            conn.close()
 
 def create_url(url):
     conn = None

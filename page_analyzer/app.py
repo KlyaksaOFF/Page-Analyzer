@@ -20,7 +20,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 
 with app.app_context():
-    from .create_db import init_db
+    from .database import init_db
     init_db()
 
 @app.route('/')
