@@ -50,7 +50,9 @@ def create_url(url):
         with conn.cursor() as cursor:
             cursor.execute('''INSERT INTO urls (name, created_at) 
             VALUES (%s, %s)''', (url, date.today()))
+            url_id = cursor.fetchone()[0]
             conn.commit()
+            return url_id
     except psycopg2.Error as e:
         print(e)
     finally:
@@ -139,4 +141,18 @@ def insert_url_checks(url_id, status_code, h1, title, description):
         print(e)
     finally:
         if conn is not None:
+            conn.close()
+
+def find_by_url_name(name):
+    conn = None
+    try:
+        conn = get_db_connection()
+        with conn.cursor() as cursor:
+            cursor.execute("SELECT id, name FROM urls WHERE name = %s", (name,))
+            row = cursor.fetchone()
+            if row:
+                return {'id': row[0], 'name': row[1]}
+            return None
+    finally:
+        if conn:
             conn.close()

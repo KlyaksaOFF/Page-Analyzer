@@ -10,6 +10,7 @@ from .database import (
     get_url_checks,
     insert_url_checks,
     select_url,
+    find_by_url_name
 )
 from .validate import validate_url
 
@@ -39,14 +40,17 @@ def create_page():
     url = request.form.get('url')
     normal = validate_url(url)
 
-    if normal is None:
+    if not normal:
         flash("Некорректный URL", "danger")
         return redirect(url_for('index'))
 
-    create_url(normal)
-    flash('Сайт успешно добавлен', 'success')
-    return redirect(url_for('index'))
-
+    existing = find_by_url_name(normal)
+    if existing:
+        flash('Страница уже существует', 'info')
+        return redirect(url_for('detail', url_id=existing['id']))
+    url_id = create_url(normal)
+    flash('Страница успешно добавлена', 'success')
+    return redirect(url_for('detail', url_id=url_id))
 
 @app.route('/urls/<int:url_id>')
 def detail(url_id):
