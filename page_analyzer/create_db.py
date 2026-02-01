@@ -25,7 +25,8 @@ def init_db():
     except psycopg2.Error as e:
         print(e)
     finally:
-        conn.close()
+        if conn is not None:
+            conn.close()
 
 if __name__ == '__main__':
     init_db()

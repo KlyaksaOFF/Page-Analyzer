@@ -27,7 +27,8 @@ def create_url(url):
     except psycopg2.Error as e:
         print(e)
     finally:
-        conn.close()
+        if conn is not None:
+            conn.close()
 
 
 def select_url():
@@ -57,7 +58,8 @@ def select_url():
         print(e)
         return []
     finally:
-        conn.close()
+        if conn is not None:
+            conn.close()
 
 
 def detail_url(url_id):
@@ -73,7 +75,8 @@ def detail_url(url_id):
         print(e)
         return None
     finally:
-        conn.close()
+        if conn is not None:
+            conn.close()
 
 
 def get_url_checks(url_id):
@@ -90,7 +93,8 @@ def get_url_checks(url_id):
         print(e)
         return []
     finally:
-        conn.close()
+        if conn is not None:
+            conn.close()
 
 
 def insert_url_checks(url_id, status_code, h1, title, description):
@@ -107,4 +111,5 @@ def insert_url_checks(url_id, status_code, h1, title, description):
     except psycopg2.Error as e:
         print(e)
     finally:
-        conn.close()
+        if conn is not None:
+            conn.close()
