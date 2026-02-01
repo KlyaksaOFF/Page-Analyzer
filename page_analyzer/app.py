@@ -84,7 +84,7 @@ def check_url(url_id):
             if description_tag and description_tag.get('content') else ''
 
         if status_code >= 500:
-            flash('Произошла ошибка', 'danger')
+            flash('Произошла ошибка при проверке', 'danger')
         else:
             if 400 <= status_code < 500:
                 flash('Сервер ответил с ошибкой', 'warning')
@@ -92,6 +92,6 @@ def check_url(url_id):
                 flash('Страница успешно проверена', 'success')
             insert_url_checks(url_id, status_code, h1, title, description)
     except requests.exceptions.RequestException:
-        flash('Произошла ошибка', 'danger')
+        flash('Произошла ошибка при проверке', 'danger')
 
     return redirect(url_for('detail', url_id=url_id))
