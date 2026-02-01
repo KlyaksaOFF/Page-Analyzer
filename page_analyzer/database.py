@@ -17,6 +17,7 @@ def get_db_connection():
     return conn
 
 def create_url(url):
+    conn = None
     try:
         conn = get_db_connection()
         with conn.cursor() as cursor:
@@ -30,6 +31,7 @@ def create_url(url):
 
 
 def select_url():
+    conn = None
     try:
         conn = get_db_connection()
         with conn.cursor() as cursor:
@@ -59,6 +61,7 @@ def select_url():
 
 
 def detail_url(url_id):
+    conn = None
     try:
         conn = get_db_connection()
         with conn.cursor() as cursor:
@@ -74,6 +77,7 @@ def detail_url(url_id):
 
 
 def get_url_checks(url_id):
+    conn = None
     try:
         conn = get_db_connection()
         with conn.cursor() as cursor:
@@ -90,6 +94,7 @@ def get_url_checks(url_id):
 
 
 def insert_url_checks(url_id, status_code, h1, title, description):
+    conn = None
     try:
         conn = get_db_connection()
         with conn.cursor() as cursor:

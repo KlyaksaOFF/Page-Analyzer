@@ -1,6 +1,7 @@
 from .database import get_db_connection
 import psycopg2
 def init_db():
+    conn = None
     try:
         conn = get_db_connection()
         with conn.cursor() as cursor:
