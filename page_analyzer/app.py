@@ -4,13 +4,14 @@ import requests
 from bs4 import BeautifulSoup
 from dotenv import load_dotenv
 from flask import Flask, flash, redirect, render_template, request, url_for
+
 from .database import (
     create_url,
     detail_url,
+    find_by_url_name,
     get_url_checks,
     insert_url_checks,
     select_url,
-    find_by_url_name
 )
 from .validate import validate_url
 
@@ -23,6 +24,7 @@ app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 with app.app_context():
     from .database import init_db
     init_db()
+
 
 @app.route('/')
 def index():
@@ -54,6 +56,7 @@ def create_page():
     url_id = create_url(normal)
     flash('Страница успешно добавлена', 'success')
     return redirect(url_for('detail', url_id=url_id))
+
 
 @app.route('/urls/<int:url_id>')
 def detail(url_id):

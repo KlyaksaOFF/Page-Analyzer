@@ -6,6 +6,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 DATABASE_URL = os.getenv('DATABASE_URL')
+
+
 def get_db_connection():
     DATABASE_URL = os.getenv('DATABASE_URL')
     if not DATABASE_URL:
@@ -14,6 +16,7 @@ def get_db_connection():
     conn = psycopg2.connect(DATABASE_URL)
     conn.autocommit = True
     return conn
+
 
 def init_db():
     conn = None
@@ -42,6 +45,7 @@ def init_db():
     finally:
         if conn is not None:
             conn.close()
+
 
 def create_url(url):
     conn = None
@@ -142,6 +146,7 @@ def insert_url_checks(url_id, status_code, h1, title, description):
     finally:
         if conn is not None:
             conn.close()
+
 
 def find_by_url_name(name):
     conn = None
