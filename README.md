@@ -1,7 +1,7 @@
 ### Hexlet tests and linter status:
 [![Actions Status](https://github.com/KlyaksaOFF/python-project-83/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/KlyaksaOFF/python-project-83/actions)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=KlyaksaOFF_python-project-83&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=KlyaksaOFF_python-project-83)
-### Page Analyzer is a web application for analyzing web pages. Users can add URLs that will be checked for availability and extract important information: headers (h1), meta descriptions, and response status codes.
+## Page Analyzer is a web application for analyzing web pages. Users can add URLs that will be checked for availability and extract important information: headers (h1), meta descriptions, and response status codes.
 ## 🚀 Features
 
     Add URLs for analysis
