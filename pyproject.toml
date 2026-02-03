@@ -19,3 +19,15 @@ dependencies = [
 members = [
     "page_analyzer",
 ]
+
+[dependency-groups]
+dev = [
+    "beautifulsoup4>=4.14.3",
+    "configobj>=5.0.9",
+    "flask>=3.1.2",
+    "gunicorn>=23.0.0",
+    "psycopg2-binary>=2.9.11",
+    "python-dotenv>=1.2.1",
+    "requests>=2.32.5",
+    "ruff>=0.14.14",
+]
