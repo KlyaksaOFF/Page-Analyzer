@@ -27,3 +27,12 @@ jobs:
       - name: Run linter and pytest
         run: |
           make lint
+
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@v6
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.projectKey=KlyaksaOFF_python-project-83
+            -Dsonar.organization=klyaksaoff
