@@ -1,4 +1,5 @@
 name: linter
+
 on:
   - push
   - pull_request
@@ -15,6 +16,7 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.13'
+          
       - name: Install uv
         run: |
           curl -LsSf https://astral.sh/uv/install.sh | sh
@@ -24,10 +26,10 @@ jobs:
         run: |
           make install
 
-      - name: Run linter and pytest
+      - name: Run linter
         run: |
-          make lint
-
+          make lint         
+          
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v6
         env:
@@ -36,3 +38,6 @@ jobs:
           args: >
             -Dsonar.projectKey=KlyaksaOFF_python-project-83
             -Dsonar.organization=klyaksaoff
+            -Dsonar.sources=page_analyzer
+            -Dsonar.host.url=https://sonarcloud.io
+            -Dsonar.python.coverage.reportPaths=coverage.xml
